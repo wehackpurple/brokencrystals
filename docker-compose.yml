@@ -1,28 +1,30 @@
 version: '3'
 services:
-db:
-image: postgres
-restart: always
-environment:
-POSTGRES_DB: bc
-POSTGRES_USER: bc
-POSTGRES_PASSWORD: bc
-volumes:
-- ./pg.sql:/docker-entrypoint-initdb.d/pg.sql
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: bc
+      POSTGRES_USER: bc
+      POSTGRES_PASSWORD: bc
+  volumes:
+    - ./pg.sql:/docker-entrypoint-initdb.d/pg.sql
+
 nodejs:
-image: neuralegion/brokencrystals
-container_name: nodejs
-restart: always
-logging:
-options:
-max-file: "5"
-max-size: "10m"
-depends_on:
-- db
+  image: neuralegion/brokencrystals
+  container_name: nodejs
+  restart: always
+  logging:
+    options:
+      max-file: "5"
+      max-size: "10m"
+  depends_on:
+    - db
+
 brokencrystals.local:
-image: neuralegion/brokencrystals-proxy-http
-restart: always
-ports:
-- "8000:80"
-depends_on:
-- nodejs
+  image: neuralegion/brokencrystals-proxy-http
+  restart: always
+  ports:
+    - "8000:80"
+  depends_on:
+    - nodejs
