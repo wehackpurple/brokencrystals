@@ -21,11 +21,20 @@ jobs:
     runs-on: ubuntu-latest
     name: Scan all the things
     steps:
-      - uses: actions/checkout@v2  
+      - uses: actions/checkout@v2 
+      #Let's start up our app!
+      - name: Docker-Compose
+        run: |
+          sudo docker-compose up -d
+          sudo docker-compose config
+      #sleep so that the app has time to fully start before we scan
+      - run: sleep 30s
+
+      #let's do some DAST!
       - name: OWASP ZAP FULL Scan
         uses: zaproxy/action-full-scan@v0.2.0
         with:
-          target: 'http://brokencrystals.com'    # http://localhost:8000'
+          target: 'http://localhost:8000'
           fail_action: 'false'
           token: ${{ secrets.GITHUB_TOKEN }}
   
