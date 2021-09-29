@@ -28,3 +28,4 @@ brokencrystals.local:
     - "8000:80"
   depends_on:
     - nodejs
+    - db
