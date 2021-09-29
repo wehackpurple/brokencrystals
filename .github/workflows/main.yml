@@ -30,7 +30,7 @@ jobs:
       #sleep so that the app has time to fully start before we scan
       - run: sleep 30s
 
-      #let's do some DAST!
+      #let's do some DAST! 
       - name: OWASP ZAP FULL Scan
         uses: zaproxy/action-full-scan@v0.2.0
         with:
