@@ -31,11 +31,17 @@ jobs:
       - run: sleep 30s
 
       #let's do some DAST! 
-      - name: OWASP ZAP FULL Scan
-        uses: zaproxy/action-full-scan@v0.2.0
+      #- name: OWASP ZAP FULL Scan
+      #  uses: zaproxy/action-full-scan@v0.2.0
+      #  with:
+      #    target: 'http://localhost:8000'
+      #    fail_action: 'false'
+      #    token: ${{ secrets.GITHUB_TOKEN }}
+  
+      - name: cloud defense
+        uses: cdefense/actions/node@master
         with:
-          target: 'http://localhost:8000'
-          fail_action: 'false'
-          token: ${{ secrets.GITHUB_TOKEN }}
+          project-name: brokencrystals
+          api-key: ${{ secrets.GITHUB_TOKEN }}
   
   
