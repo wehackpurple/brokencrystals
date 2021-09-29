@@ -7,8 +7,8 @@ services:
       POSTGRES_DB: bc
       POSTGRES_USER: bc
       POSTGRES_PASSWORD: bc
-  volumes:
-    - ./pg.sql:/docker-entrypoint-initdb.d/pg.sql
+    volumes:
+      - ./pg.sql:/docker-entrypoint-initdb.d/pg.sql
 
 nodejs:
   image: neuralegion/brokencrystals
